@@ -18,10 +18,10 @@ __maintainer__ = 'Colour Developers'
 __email__ = 'colour-developers@colour-science.org'
 __status__ = 'Production'
 
-__all__ = ['TestBasicExponentFunction', 'TestMonitorCurveExponentFunction']
+__all__ = ['TestExponentFunctionBasic', 'TestExponentFunctionMonitorCurve']
 
 
-class TestBasicExponentFunction(unittest.TestCase):
+class TestExponentFunctionBasic(unittest.TestCase):
     """
     Defines :func:`colour.models.rgb.transfer_functions.exponent.\
 exponent_function_basic` definition unit tests methods.
@@ -169,8 +169,17 @@ exponent_function_basic` definition nan support.
         for case in cases:
             exponent_function_basic(case, case)
 
+    def test_raise_exception_exponent_function_basic(self):
+        """
+        Tests :func:`colour.models.rgb.transfer_functions.exponent.\
+exponent_function_basic` definition raised exception.
+        """
 
-class TestMonitorCurveExponentFunction(unittest.TestCase):
+        self.assertRaises(ValueError, exponent_function_basic, 0.18, 2.2,
+                          'Undefined')
+
+
+class TestExponentFunctionMonitorCurve(unittest.TestCase):
     """
     Defines :func:`colour.models.rgb.transfer_functions.exponent.\
 exponent_function_monitor_curve` definition unit tests methods.
@@ -319,6 +328,15 @@ exponent_function_monitor_curve` definition nan support.
 
         for case in cases:
             exponent_function_monitor_curve(case, case, case)
+
+    def test_raise_exponent_function_monitor_curve(self):
+        """
+        Tests :func:`colour.models.rgb.transfer_functions.exponent.\
+exponent_function_monitor_curve` definition raised exception.
+        """
+
+        self.assertRaises(ValueError, exponent_function_monitor_curve, 0.18,
+                          2.2, 0, 'Undefined')
 
 
 if __name__ == '__main__':
